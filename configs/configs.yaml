@@ -1,0 +1,28 @@
+experiments:
+  - project_name: master-thesis
+    run_name: resnet_charite_affine_dropout
+    train_csv_path:     # Specify path
+    val_csv_path:     # Specify path
+    test_csv_path:     # Specify path
+    vims_csv_path:     # Specify path
+    berl_csv_path:     # Specify path
+    additional_csv_path:     # Specify path
+    ms_csv_path:     # Specify path
+    berl_ms_csv_path:     # Specify path
+    split: 3     # Select the datamodule (1: OpenBHB dataset, 2: OpenBHB dataset + Charite dataset, 3: MNI Structural Atlas, 4: Neuromorphometrics Atlas)
+    dropout: 0     # 0: no dropout, 1: dropout (0.5)
+    atlas_threshold: 25     # Select the type of MNI Structural Atlas (0: Atlas with 0.0 threshold, 25: Atlas with 0.25 threshold, 50: Atlas with 0.5 threshold)
+    even_distribution: 0     # 0: standard sampler, 1: weighted sampler
+    augmentation: 2     # 0: no data augmentation, 1: rotation and translation, 2: translation, 3: rotation
+    loss_weighted: 0     # 0: standard loss function, 1: Charite scans weighted by 3x, 2: Charite scans weighted by 10x, 3: Charite scans weighted by 50x
+    model: ResNet     # Select the model architecture: ResNet or DenseNet (i.e. ResNet-18 or DenseNet-121)
+    model_type: "multitask"     # normal: standard age prediction model, feature: incorporate sex as non-imaging feature, feature2: dito but with two fc layers, multitask: model predicts both age and sex
+    multitask_loss: 1     # 0: summed multitask loss function, 1: automatically weighted multitask loss function
+    optimizer: Adam     # Select the optimizer: Adam, AdamW or SGD
+    learning_rate: 1e-4     # Select the inital learning rate
+    weight_decay: 5e-5     # Specify the  weight decay
+    scheduler: CosineAnnealingLR     # Select the learning rate scheduler: StepLR, ReduceLROnPlateau, CosineAnnealingLR or CosineAnnealingWarmRestarts
+    epochs: 100     # Specify the number of epochs
+    batch_size: 16     # Specify the batch size
+    early_stopping_patience: 50     # Specify after how many epochs without imporvements the training should be stopped
+    accumulate_grad_batches: 1     # Specify how many batches should be accumulated (i.e. simulate larger batch size)
