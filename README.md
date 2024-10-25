@@ -1,6 +1,6 @@
-# Masterthesis (Brain Age Prediction)
+# Brain Age Prediction
 
-This repository contains the training pipeline developed for brain age prediction as part of my master’s thesis. The goal of this project is to predict brain age from 3D MRI scans using deep learning models such as ResNet-18 and DenseNet-121. 
+This repository contains the training pipeline developed for brain age prediction. The goal of this project is to predict brain age from 3D MRI scans using deep learning models such as ResNet-18 and DenseNet-121. 
 
 **Note:** The code in this repository cannot be executed without access to the MRI data, which is not publicly available.
 
