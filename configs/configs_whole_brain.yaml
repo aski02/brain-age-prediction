@@ -1,0 +1,50 @@
+project_name: "GlobalBrainAge"
+run_name: "whole_brain"
+seed: 42  # Seed for reproducibility
+
+# Model Configuration
+model: "ResNet"  # Options: "ResNet", "DenseNet"
+model_type: "multitask"  # Options: "basic", "feature", "multitask"
+backbone: "resnet18"  # Backbone model for ResNet; options: "resnet18", "resnet34", "resnet50", "resnet101"
+dropout: False  # Use dropout in the model
+multitask_loss: 1  # Use automatic weighted loss in multitask (only for model_type "multitask")
+
+# Training Parameters
+epochs: 200
+batch_size: 12
+learning_rate: 0.0001
+weight_decay: 0.00005
+optimizer: "Adam"  # Options: "Adam", "AdamW", "SGD"
+scheduler: "CosineAnnealingLR"  # Options: "ReduceLROnPlateau", "StepLR", "CosineAnnealingLR", "CosineAnnealingWarmRestarts", None
+scheduler_gamma: 0.9
+scheduler_step_size: 10
+use_early_stopping: False  # Enable early stopping
+early_stopping_patience: 100
+accumulate_grad_batches: 1
+
+# Data Module Configuration
+data_root_path: '../Data'
+train_csv_path: 'data/data/TRAIN_OpenBHB.csv'
+val_csv_path: 'data/data/VALIDATION_OpenBHB.csv'
+test_csv_path: 'data/data/TEST_OpenBHB.csv'
+
+data_module_type: "default"  # Options: "default", "neuromorphometrics_atlas", "whole_brain_charite", etc.
+crop_type: "image"  # Options: "image", "region", None
+atlas_type: "neuromorphometrics"  # Options: "neuromorphometrics", "mni" (if crop_type is "region")
+region_id: None  # Region ID to crop (if crop_type is "region")
+atlas_threshold: 0  # Threshold for MNI atlas (if atlas_type is "mni")
+augmentation: 0  # Augmentation level (0: none, 1: rotation + affine, 2: affine only, 3: rotation only)
+cache_rate: 0.5  # Cache rate for data loading
+even_distribution: 0  # Use weighted random sampler for even age distribution
+loss_weighted: 0  # Use weighted loss based on scanner type
+
+# Logging and Checkpointing
+wandb_mode: "online"  # Options: "online", "offline"
+wandb_entity: "niklas2"
+gpus: 1  # Number of GPUs to use
+
+# Additional Parameters
+split: 0  # Custom parameter; can be used for specific dataset splits
+age_bins: [5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 35,
+           38, 41, 44, 47, 50, 53, 56, 59, 62, 65,
+           68, 71, 74, 77, 80, 90]  # Age bins for sample weighting
